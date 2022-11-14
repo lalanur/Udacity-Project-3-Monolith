@@ -13,7 +13,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v3
-
-    - run: test
+    - run: docker-compose -f docker-compose-build.yaml build --parallel
+    - run: docker tag udagram-frontend:local lalanura/udagram-frontend:v1
+    - run: docker tag udagram-api-user lalanura/udagram-api-user:v1
+    - run: docker tag udagram-api-feed lalanura/udagram-api-feed:v1
+    - run: docker tag reverseproxy lalanura/reverseproxy:v1
+    - run: docker push lalanura/udagram-frontend:v1
+    - run: docker push lalanura/udagram-api-user:v1
+    - run: docker push lalanura/udagram-api-feed:v1
+    - run: docker push lalanura/reverseproxy:v1
+    
