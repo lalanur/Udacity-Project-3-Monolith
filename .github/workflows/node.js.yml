@@ -21,8 +21,8 @@ jobs:
     - run: docker tag udagram-api-user lalanura/udagram-api-user:v1
     - run: docker tag udagram-api-feed lalanura/udagram-api-feed:v1
     - run: docker tag reverseproxy lalanura/reverseproxy:v1
+    - run: echo "${{secrets.DOCKER_PASSWORD}}". | docker login -u "${{secrets.DOCKER_USERNAME}}" --password-stdin
     - run: docker push lalanura/udagram-frontend:v1
     - run: docker push lalanura/udagram-api-user:v1
     - run: docker push lalanura/udagram-api-feed:v1
     - run: docker push lalanura/reverseproxy:v1
-    
